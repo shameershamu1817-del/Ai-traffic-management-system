@@ -36,6 +36,7 @@ cd backend
 
 ## Deploy on Render
 Create a Blueprint from this repository and use `render.yaml`. It deploys the FastAPI backend and serves the frontend from the same service.
+The root `.python-version` file selects the latest Python 3.11 patch on Render. This avoids Render's newer Python 3.14 default, for which the pinned `pydantic-core` dependency may need an unavailable Rust build.
 
 The equivalent commands are:
 ```sh
