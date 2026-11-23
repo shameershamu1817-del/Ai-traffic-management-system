@@ -1,4 +1,4 @@
-const API='http://127.0.0.1:8000/api';
+const API=location.port==='5173'?'http://127.0.0.1:8000/api':'/api';
 const $=s=>document.querySelector(s);
 async function get(path){const r=await fetch(API+path);if(!r.ok)throw new Error(await r.text());return r.json()}
 function fmt(n){return Number(n).toLocaleString()}

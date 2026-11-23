@@ -12,6 +12,11 @@ def test_health():
     assert response.status_code == 200
     assert response.json()['status'] == 'ok'
 
+def test_frontend_is_served():
+    response = client.get('/')
+    assert response.status_code == 200
+    assert "Traffic Command Center" in response.text
+
 def test_dashboard():
     response = client.get('/api/dashboard')
     assert response.status_code == 200

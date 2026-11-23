@@ -34,5 +34,16 @@ cd backend
 "C:/Users/SHAMAN K J/AppData/Local/Programs/Python/Python311/python.exe" -m pytest -q
 ```
 
+## Deploy on Render
+Create a Blueprint from this repository and use `render.yaml`. It deploys the FastAPI backend and serves the frontend from the same service.
+
+The equivalent commands are:
+```sh
+pip install -r backend/requirements.txt
+python -m uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port $PORT
+```
+
+Set `ENVIRONMENT=production`, `DATABASE_URL=sqlite:///./smart_traffic.db`, and a strong `JWT_SECRET`. SQLite is suitable for a demo but Render's filesystem is ephemeral; use a persistent database for production data.
+
 ## Safety and data status
 No public traffic signals are controlled by this implementation. Signal optimization is simulation-only. Traffic, vehicle, and prediction values must be replaced or clearly sourced through real integrations before operational use.

@@ -1,6 +1,8 @@
 from datetime import datetime
+from pathlib import Path
 from fastapi import FastAPI, Depends, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from app.core.config import settings
@@ -107,3 +109,6 @@ def weather():
     if not settings.openweather_api_key:
         return {"source": "Not connected — OPENWEATHER_API_KEY missing", "configured": False, "timestamp": datetime.utcnow()}
     return {"source": "OpenWeather integration", "configured": True, "timestamp": datetime.utcnow()}
+
+frontend_dir = Path(__file__).resolve().parents[2] / "frontend"
+app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
